@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>College Registration - Hackathon Buddy</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f5f6fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .form-container {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    input, select {
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, select:focus {
+      border-color: #3b82f6;
+    }
+    button, .otp-button {
+      padding: 12px;
+      font-size: 18px;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: fit-content;
+      margin-top: 5px;
+    }
+    button:hover, .otp-button:hover {
+      background-color: #2563eb;
+    }
+    .otp-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 25px;
+    }
+    .back-link a {
+      color: #3b82f6;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>College Registration</h2>
+    <form id="collegeRegForm" action="/register/college" method="POST">
+
+      <input type="text" name="collegeName" placeholder="College Name" required />
+
+      <input type="text" name="collegeCode" placeholder="College Code (AISE Code)" required />
+
+      <input type="email" name="collegeEmail" id="collegeEmail" placeholder="Official College Email" required />
+
+
+      <input type="password" name="password" id="password" placeholder="Password" required />
+
+      <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required />
+
+      <input type="text" name="addressCity" placeholder="City" required />
+
+      <input type="text" name="addressState" placeholder="State" required />
+
+      <input type="text" name="pincode" placeholder="Pincode" required pattern="\d{6}" title="6 digit pincode" />
+
+      <input type="text" name="contactPerson" placeholder="Contact Person Name" required />
+
+      <input type="email" name="contactEmail" placeholder="Contact Email" required />
+
+      <select name="collegeType" required>
+        <option value="" disabled selected>Select College Type</option>
+        <option value="private">Private</option>
+        <option value="government">Government</option>
+        <option value="autonomous">Autonomous</option>
+      </select>
+
+      <button type="submit">Register College</button>
+    </form>
+
+    <div class="back-link">
+      <p><a href="/signup">← Back to Signup</a></p>
+    </div>
+  </div>
+
+<script>
+  const sendOtpBtn = document.getElementById('sendOtpBtn');
+  const otpInput = document.getElementById('otp');
+  const collegeEmailInput = document.getElementById('collegeEmail');
+
+  sendOtpBtn.addEventListener('click', () => {
+    const email = collegeEmailInput.value.trim();
+    if(!email) {
+      alert('Please enter your college email first.');
+      return;
+    }
+    // Disable button to prevent multiple sends
+    sendOtpBtn.disabled = true;
+    sendOtpBtn.textContent = 'Sending...';
+
+    // Simulate sending OTP request (you need to implement backend)
+    fetch('/send-college-otp', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email })
+    }).then(res => res.json())
+    .then(data => {
+      if(data.success) {
+        alert('OTP sent to ' + email);
+        otpInput.disabled = false;
+        otpInput.focus();
+      } else {
+        alert('Error sending OTP. Try again.');
+      }
+    }).catch(() => {
+      alert('Error sending OTP. Try again.');
+    }).finally(() => {
+      sendOtpBtn.disabled = false;
+      sendOtpBtn.textContent = 'Send OTP';
+    });
+  });
+
+  // Optional: Validate password and confirm password match on submit
+  document.getElementById('collegeRegForm').addEventListener('submit', function(e) {
+    const pass = document.getElementById('password').value;
+    const confirmPass = document.getElementById('confirmPassword').value;
+    if(pass !== confirmPass) {
+      e.preventDefault();
+      alert('Password and Confirm Password do not match.');
+    }
+  });
+</script>
+
+</body>
+</html>

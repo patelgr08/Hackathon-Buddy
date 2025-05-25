@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .edit-form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+
+    .edit-form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #0a66c2;
+    }
+
+    .edit-form input[type="text"],
+    .edit-form input[type="email"],
+    .edit-form input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .edit-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #0a66c2;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .edit-form button:hover {
+      background-color: #004182;
+    }
+  </style>
+</head>
+<body>
+
+  <form class="edit-form" action="/register/edit" method="POST" enctype="multipart/form-data">
+    <h2>Edit Profile</h2>
+
+    <input type="text" name="fullName" value="<%= user.fullName %>" placeholder="Full Name" required>
+    <input type="email" name="email" value="<%= user.email %>" placeholder="Email" required>
+    <input type="text" name="college" value="<%= user.college %>" placeholder="College">
+    <input type="text" name="year" value="<%= user.year %>" placeholder="Year">
+    <input type="text" name="techstack" value="<%= user.techstack %>" placeholder="Tech Stack">
+    <input type="text" name="linkedin" value="<%= user.linkedin %>" placeholder="LinkedIn URL">
+    <label>Change Profile Picture:</label>
+    <input type="file" name="profilePicture">
+
+    <button type="submit">Save Changes</button>
+  </form>
+
+</body>
+</html>

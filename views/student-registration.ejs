@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Registration</title>
+  <style>
+    /* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #f5f6fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.signup-container {
+  width: 95%;
+  max-width: 600px;
+  background: #fff;
+  padding: 30px 35px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.signup-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* Form Inputs */
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px #e0ecff;
+}
+
+/* OTP Section */
+.otp-group {
+  display: flex;
+  gap: 10px;
+}
+
+.otp-group input {
+  flex: 2;
+}
+
+.otp-group button {
+  flex: 1;
+  background-color: #3b82f6;
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.otp-group button:hover {
+  background-color: #2563eb;
+}
+
+.otp-verify {
+  margin-bottom: 15px;
+}
+
+/* Submit Button */
+form button[type="submit"] {
+  background-color: #16a34a;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.2s;
+}
+
+form button[type="submit"]:hover {
+  background-color: #15803d;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .signup-container {
+    padding: 20px;
+  }
+
+  .otp-group {
+    flex-direction: column;
+  }
+
+  .otp-group button {
+    width: 100%;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <div class="signup-container">
+    <h2>Student Registration</h2>
+
+    <form action="/register/student" method="POST">
+
+      <input type="text" name="fullName" placeholder="Full Name" required />
+
+      <div class="otp-group">
+        <!-- Email Field -->
+         <input type="email" id="email" name="email" placeholder="Email" required />
+
+        <!-- OTP Section -->
+         <button type="button" onclick="sendOTP()">Send OTP</button>
+         <input type="text" id="otp" name="otp" placeholder="Enter OTP" required>
+
+        <!-- Hidden field to store verification status -->
+         <input type="hidden" id="emailVerified" name="emailVerified" value="false">
+      </div>
+
+      <input type="password" name="password" placeholder="Password" required />
+      <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
+
+      <input type="text" name="college" placeholder="College Name" required />
+      <input type="text" name="branch" placeholder="Branch / Stream" required />
+
+      <select name="year" required>
+        <option value="">Select Year of Study</option>
+        <option value="1st">1st Year</option>
+        <option value="2nd">2nd Year</option>
+        <option value="3rd">3rd Year</option>
+        <option value="4th">4th Year</option>
+      </select>
+
+      <input type="text" name="techstack" placeholder="Tech Stack (e.g. HTML, JS, C++)" required />
+      <input type="text" name="role" placeholder="Primary Role (e.g. Frontend Developer)" required />
+      <input type="text" name="city" placeholder="City" required />
+      <input type="text" name="state" placeholder="State" required />
+
+      <input type="url" name="github" placeholder="GitHub Profile" required />
+      <input type="url" name="linkedin" placeholder="LinkedIn Profile" required />
+
+      <button onclick="location.href='/register/dashboard'">submit</button>
+    </form>
+
+  </div>
+
+  <script src="../models/student.js"></script>
+</body>
+</html>

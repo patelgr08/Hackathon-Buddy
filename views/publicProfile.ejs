@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= user.name %>'s Profile</title>
+</head>
+<body>
+    <h1><%= user.name %> - <%= type %></h1>
+  <p><strong>Email:</strong> <%= user.email %></p>
+  <p><strong>College:</strong> <%= user.college %></p>
+  <p><strong>Skills:</strong> <%= user.skills.join(", ") %></p>
+  <p><strong>Location:</strong> <%= user.location || "Not Provided" %></p>
+  <!-- You can customize more -->
+  <a href="/dashboard">← Back to Dashboard</a>
+</body>
+</html>

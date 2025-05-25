@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mentor Dashboard</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #eef3f8;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .dashboard-card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .dashboard-card h2 {
+      color: #0a66c2;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-card p {
+      margin: 8px 0;
+    }
+
+    a.button {
+      display: inline-block;
+      margin-top: 15px;
+      background-color: #0a66c2;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    a.button:hover {
+      background-color: #004182;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-card">
+    <h2>Welcome, <%= mentor.fullName %>!</h2>
+    <p><strong>Email:</strong> <%= user.email %></p>
+    <p><strong>Experience:</strong> <%= user.experience %> years</p>
+    <p><strong>Expertise:</strong> <%= mentor.expertise %></p>
+    <p><strong>LinkedIn:</strong> <a href="<%= mentor.linkedin %>" target="_blank"><%= mentor.linkedin %></a></p>
+    <% if (mentor.github) { %>
+      <p><strong>GitHub:</strong> <a href="<%= mentor.github %>" target="_blank"><%= mentor.github %></a></p>
+    <% } %>
+    <% if (mentor.portfolio) { %>
+      <p><strong>Portfolio:</strong> <a href="<%= mentor.portfolio %>" target="_blank"><%= mentor.portfolio %></a></p>
+    <% } %>
+    <p><strong>Location:</strong> <%= mentor.city %>, <%= mentor.state %></p>
+
+    <a class="button" href="/edit/mentor/<%= mentor._id %>">Edit Profile</a>
+  </div>
+
+</body>
+</html>

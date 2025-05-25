@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Students</title>
+  <style>
+    .student-card {
+      border: 1px solid #ddd;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+    }
+    .connect-button {
+      display: inline-block;
+      margin-top: 0.8rem;
+      padding: 0.5rem 1rem;
+      background-color: #5b9fe8;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .connect-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Explore Students</h1>
+
+  <form method="GET" action="/explore/students">
+    <input type="text" name="techStack" placeholder="Tech Stack (e.g., React, Python)" value="<%= filters.techStack || '' %>" />
+    <input type="text" name="city" placeholder="City" value="<%= filters.city || '' %>" />
+    <input type="text" name="state" placeholder="State" value="<%= filters.state || '' %>" />
+    <button type="submit">Apply Filters</button>
+  </form>
+
+  <hr>
+
+  <% if (students.length === 0) { %>
+    <p>No students found with selected filters.</p>
+  <% } else { %>
+    <% students.forEach(student => { %>
+      <div class="student-card">
+        <h3><%= student.fullName %></h3>
+        <p><strong>Email:</strong> <%= student.email %></p>
+        <p><strong>Tech Stack:</strong> <%= student.techstack %></p>
+        <p><strong>Branch/Stream:</strong> <%= student.branch %></p>
+        <p><strong>Location:</strong> <%= student.city %>, <%= student.state %></p>
+        <% if (student.github) { %><a href="<%= student.github %>" target="_blank">GitHub</a><% } %>
+
+        <!-- Connect Button -->
+        <form action="/connect/<%= student._id %>" method="POST">
+          <button class="connect-button" type="submit">Connect</button>
+        </form>
+      </div>
+    <% }) %>
+  <% } %>
+</body>
+</html>

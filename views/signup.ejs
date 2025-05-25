@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Signup - Choose Registration Type</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f5f6fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 40px 50px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+    h2 {
+      margin-bottom: 30px;
+      color: #333;
+    }
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    button {
+      padding: 15px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #3b82f6;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Register as</h2>
+    <div class="btn-group">
+  <button onclick="location.href='/register/student'">Student Registration</button>
+  <button onclick="location.href='/register/mentor'">Mentor Registration</button>
+  <button onclick="location.href='/register/college'">College Registration</button>
+</div>
+  </div>
+
+</body>
+</html>

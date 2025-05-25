@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Results</title>
+</head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+  }
+  h2 {
+    color: #333;
+  }
+  h3 {
+    color: #555;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+<body>
+  <h2>Search Results for "<%= query %>"</h2>
+
+  <h3>Students:</h3>
+  <% if (students.length > 0) { %>
+    <ul>
+      <% students.forEach(student => { %>
+        <li>
+          <strong><%= student.fullName %></strong>
+          <a href="/register/view-profile/<%= student._id %>">View Profile</a>
+          <form action="/register/connect" method="POST" style="display:inline;">
+            <input type="hidden" name="targetId" value="<%= student._id %>">
+            <button type="submit">Connect</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No students found.</p>
+  <% } %>
+
+  <h3>Mentors:</h3>
+  <% if (mentors.length > 0) { %>
+    <ul>
+      <% mentors.forEach(mentor => { %>
+        <li>
+          <strong><%= mentor.fullName %></strong> - <%= mentor.email %>
+          <a href="/register/view-profile/<%= mentor._id %>">View Profile</a>
+          <form action="/register/connect" method="POST" style="display:inline;">
+            <input type="hidden" name="targetId" value="<%= mentor._id %>">
+            <button type="submit">Connect</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No mentors found.</p>
+  <% } %>
+
+  <a href="/register/dashboard">← Back to Dashboard</a>
+  <script>
+  document.querySelectorAll('form[action="/register/connect"]').forEach(form => {
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault(); // Prevent default form submission
+
+      const formData = new FormData(form);
+      const targetId = formData.get("targetId");
+
+      try {
+        const res = await fetch("/register/connect", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ targetId }),
+        });
+
+        const result = await res.json();
+        if (result.success) {
+          alert("Connection sent");
+        } else {
+          alert("Failed to send connection");
+        }
+      } catch (err) {
+        alert("Error occurred");
+      }
+    });
+  });
+</script>
+</body>
+</html>

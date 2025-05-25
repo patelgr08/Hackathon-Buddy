@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Profile</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f3f2ef;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 40px;
+    }
+
+    .profile-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .profile-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid #0a66c2;
+    }
+
+    .profile-card h2 {
+      margin: 10px 0 5px;
+      font-size: 24px;
+      color: #0a66c2;
+    }
+
+    .profile-card p {
+      margin: 8px 0;
+      color: #555;
+    }
+
+    .profile-card a {
+      color: #0a66c2;
+      text-decoration: none;
+    }
+
+    .profile-card a:hover {
+      text-decoration: underline;
+    }
+
+    .no-picture {
+      font-style: italic;
+      color: #888;
+      margin-bottom: 15px;
+    }
+    .action-btn {
+    background-color: #0a66c2;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    margin: 10px 5px 0;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+
+  .action-btn:hover {
+    background-color: #004182;
+  }
+  </style>
+</head>
+<body>
+
+  <div class="profile-card">
+    <% if (user.profilePicture) { %>
+      <img src="/uploads/<%= user.profilePicture %>" alt="Profile Picture" />
+    <% } else { %>
+      <p class="no-picture">No profile picture uploaded.</p>
+    <% } %>
+
+    <h2><%= user.fullName %></h2>
+    <p><strong>Email:</strong> <%= user.email %></p>
+    <p><strong>College:</strong> <%= user.college %></p>
+    <p><strong>Year:</strong> <%= user.year %></p>
+    <p><strong>Tech Stack:</strong> <%= user.techstack %></p>
+    <p><strong>LinkedIn:</strong> <a href="<%= user.linkedin %>" target="_blank"><%= user.linkedin %></a></p>
+
+    <!-- Buttons -->
+    <form action="/register/connect" method="POST" style="display: inline;">
+      <input type="hidden" name="targetId" value="<%= user._id %>">
+      <button onclick="sendConnectionRequest('<%= user._id %>')" class="action-btn">Connect</button>
+    </form>
+
+    <form action="/messages/start" method="GET" style="display: inline;">
+      <input type="hidden" name="targetId" value="<%= user._id %>">
+      <button type="submit" class="action-btn">Message</button>
+    </form>
+
+    <form action="/register/edit" method="GET">
+      <button type="submit" class="action-btn">Edit Profile</button>
+    </form>
+  </div>
+
+<script>
+  function sendConnectionRequest(targetId) {
+    fetch('/register/connect', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ targetId })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert("Connection sent!");
+      } else {
+        alert("Failed to connect.");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      alert("Something went wrong!");
+    });
+  }
+
+</script>
+</body>
+</html>

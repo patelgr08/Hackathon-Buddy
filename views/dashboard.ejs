@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 20px;
+}
+
+.search-form {
+  display: flex;
+}
+
+.search-form input[type="text"] {
+  padding: 8px 10px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 20px 0 0 20px;
+  outline: none;
+}
+
+.search-form button {
+  padding: 8px 15px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 0 20px 20px 0;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background-color: #218838;
+}
+
+.navbar-right a {
+  margin-left: 20px;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar-right a:hover {
+  color: #007bff;
+}
+
+.dashboard-content {
+  padding: 30px 20px;
+}
+
+.hackathon-section {
+  padding: 30px 20px;
+}
+
+.hackathon-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.hackathon-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 300px;
+  padding: 15px;
+  text-align: center;
+}
+
+.hackathon-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.hackathon-card h3 {
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.hackathon-card p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.register-btn {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-btn:hover {
+  background-color: #0056b3;
+}
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-left">
+      <img src="/path/to/logo.png" alt="HackathonBuddy" class="logo" />
+      <form action="/register/search" method="GET" class="search-form">
+        <input type="text" name="query" placeholder="Search students or mentors..." required>
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    <div class="navbar-right">
+      <a href="/explore/students">Explore</a>
+      <a href="/register/chat">Messages</a>
+      <a href="/register/profile">Profile</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+    <h2>Hello, <%= user.fullName %>!</h2>
+    <h2>Welcome to your Dashboard</h2>
+  </div>
+  <div class="hackathon-section">
+  <h2>Upcoming Hackathons</h2>
+  <div class="hackathon-cards">
+    
+    <!-- Hackathon 1 -->
+    <div class="hackathon-card">
+      <img src="/images/hackathon1.jpg" alt="Hackathon 1 Poster">
+      <h3>InnovateX 2025</h3>
+      <p><strong>College:</strong> MIT Pune</p>
+      <p><strong>Date:</strong> June 15–16, 2025</p>
+      <p><strong>Mode:</strong> Offline</p>
+      <p><strong>Domain:</strong> AI & ML</p>
+      <a href="#" class="register-btn">Register</a>
+    </div>
+
+    <!-- Hackathon 2 -->
+    <div class="hackathon-card">
+      <img src="/images/hackathon2.jpg" alt="Hackathon 2 Poster">
+      <h3>CodeSprint 2.0</h3>
+      <p><strong>College:</strong> VIT Chennai</p>
+      <p><strong>Date:</strong> July 10–11, 2025</p>
+      <p><strong>Mode:</strong> Online</p>
+      <p><strong>Domain:</strong> Web Dev</p>
+      <a href="#" class="register-btn">Register</a>
+    </div>
+
+    <!-- Hackathon 3 -->
+    <div class="hackathon-card">
+      <img src="/images/hackathon3.jpg" alt="Hackathon 3 Poster">
+      <h3>HackNIT 5.0</h3>
+      <p><strong>College:</strong> NIT Surat</p>
+      <p><strong>Date:</strong> August 5–6, 2025</p>
+      <p><strong>Mode:</strong> Offline</p>
+      <p><strong>Domain:</strong> Blockchain</p>
+      <a href="#" class="register-btn">Register</a>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
